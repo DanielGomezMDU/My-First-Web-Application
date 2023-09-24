@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Request Information</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <!-- Adding the Bootstrap container -->
+    <div class="container">
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-4">My first web application</h1>
+                <p>&nbsp;</p> <!-- Espacio en blanco -->
+
+                <p>Request data</p>
+                <ul>
+                    <li>Method: <span id="methodPlaceholder">{{method}}</span></li>
+                    <li>Path: <span id="pathPlaceholder">{{path}}</span></li>
+                    <li>Query string: <span id="queryPlaceholder">{{query}}</span></li>
+                </ul>
+
+                <p>Parsed queries</p>
+                <ul id="parsedQueriesList">
+                    <!-- Parameter values will be added here using JavaScript -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get the query string from the URL
+        var queryString = window.location.search;
+        var urlParams = new URLSearchParams(queryString);
+
+        // Insert the complete query string into "Query string"
+        document.getElementById("queryPlaceholder").textContent = queryString;
+
+        // Get and display all URL parameters
+        var parsedQueriesList = document.getElementById("parsedQueriesList");
+
+        // Iterate through query parameters and add them to the list
+        for (var [key, value] of urlParams) {
+            var parametroLi = document.createElement("li");
+            parametroLi.textContent = key + ": " + value;
+            parsedQueriesList.appendChild(parametroLi);
+        }
+
+        // Update the method and path values
+        document.getElementById("methodPlaceholder").textContent = "GET";
+        document.getElementById("pathPlaceholder").textContent = "/information";
+    </script>
+</body>
+</html>
+
+
+<!-- 
+http://localhost:8000/information?a=<script>alert('Owned');</script>
+ -->
+
